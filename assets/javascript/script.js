@@ -4,6 +4,8 @@ var totaltime = document.getElementById("totaltime");
 var dropthedotbutton = document.getElementById("dropthedotbutton");
 var recordfloorbutton = document.getElementById("recordfloorbutton");
 var totaltimebutton = document.getElementById("totaltimebutton");
+var time = 0;
+var timerInterval;
 
 function chartme(number, totalhrs) {
   return number / (60 * totalhrs);
@@ -17,7 +19,45 @@ function totaltimer(score, seconds) {
   return score * (60 / seconds);
 }
 
-console.log(totaltimer(2, 30));
+function timerReset() {
+  clearInterval(timerInterval);
+  time = 0;
+  document
+    .getElementById("timerdisplay")
+    .textContent("Click 'start' to initiate timer.");
+}
+
+function timerStop() {
+  clearInterval(timerInterval);
+}
+
+function countup() {
+  time++;
+  document
+    .getElementById("timer-display")
+    .textContent("Time: " + time + " seconds.");
+}
+
+document
+  .getElementById("start-timer-btn")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    timerInterval = setIntervbal(countup, 1000);
+  });
+
+document
+  .getElementById("stop-timer-btn")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    timerStop();
+  });
+
+document
+  .getElementById("reset-timer-btn")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    timerReset();
+  });
 
 document
   .getElementById("dropthedotbutton")
