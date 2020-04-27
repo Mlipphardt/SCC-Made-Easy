@@ -8,12 +8,12 @@ window.onload = function () {
   var time = 0;
   var timerInterval;
 
-  function chartme(number, totalhrs) {
-    return number / (60 * totalhrs);
+  function chartme(number, minutes) {
+    return number / minutes;
   }
 
   function findfloor(timing) {
-    return 1 / (timing * 60);
+    return 1 / timing;
   }
 
   function totaltimer(score, seconds) {
@@ -61,19 +61,21 @@ window.onload = function () {
   document
     .getElementById("dropthedotbutton")
     .addEventListener("click", function () {
-      var dot = prompt("Enter your frequency data.");
-      var floor = prompt("Enter the record floor in hours.");
+      var dot = document.getElementById("dot-frequency").value.trim();
+      var floor = document.getElementById("dot-floor").value.trim();
+      console.log(dot);
+      console.log(floor);
       dropthedot.textContent = chartme(dot, floor);
     });
 
   recordfloorbutton.addEventListener("click", function () {
-    var floor = prompt("What is the record floor in hours?");
+    var floor = document.getElementById("floor-minutes").value.trim();
     recordfloor.textContent = findfloor(floor);
   });
 
   totaltimebutton.addEventListener("click", function () {
-    var score = prompt("What was the frequency");
-    var timing = prompt("What was the duration of the timing in seconds?");
+    var score = document.getElementById("tt-frequency").value.trim();
+    var timing = document.getElementById("tt-floor").value.trim();
     totaltimetext.textContent = totaltimer(score, timing);
   });
 };
